@@ -1,25 +1,39 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اللاجئين السوريين حول العالم</title>
-    <!-- استيراد خط كايو العربي من جوجل -->
+    <title>اللاجئين السوريين حول العالم | المنصة الإخبارية العالمية</title>
+    <!-- خط كايو العربي -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <!-- مكتبة أيقونات FontAwesome -->
+    <!-- مكتبة الأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #1e3a8a;
-            --primary-dark: #1e293b;
-            --secondary: #d97706;
+            --primary: #1d4ed8;
+            --primary-dark: #1e3a8a;
+            --secondary: #f59e0b;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
-            --text-main: #334155;
+            --text-main: #1e293b;
             --text-light: #64748b;
             --border: #e2e8f0;
-            --danger: #dc2626;
-            --success: #16a34a;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary: #3b82f6;
+            --primary-dark: #60a5fa;
+            --secondary: #fbbf24;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f1f5f9;
+            --text-light: #94a3b8;
+            --border: #334155;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
         }
 
         * {
@@ -27,82 +41,100 @@
             margin: 0;
             padding: 0;
             font-family: 'Cairo', sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
+        /* شريط التنقل العلوي */
+        .top-bar {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .top-bar-left, .top-bar-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle, .btn-admin-top {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.85rem;
+        }
+
+        .theme-toggle:hover, .btn-admin-top:hover {
+            background: white;
+            color: var(--primary-dark);
+        }
+
+        /* رأس الموقع الرئيسي */
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
-            padding: 2rem 1rem;
+            padding: 3rem 1rem;
             text-align: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            position: relative;
+            box-shadow: var(--shadow);
         }
 
         header h1 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
             font-weight: 900;
+            letter-spacing: -0.5px;
         }
 
         header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1.15rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        .admin-btn-container {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-        }
-
-        .btn-admin {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .btn-admin:hover {
-            background-color: white;
-            color: var(--primary);
-        }
-
+        /* شريط الأخبار العاجلة */
         .ticker-container {
             background-color: var(--secondary);
-            color: white;
+            color: #111827;
             padding: 0.75rem 1rem;
             display: flex;
             align-items: center;
-            font-weight: 600;
+            font-weight: 700;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .ticker-title {
-            background: #b45309;
-            padding: 0.25rem 0.75rem;
+            background: rgba(0, 0, 0, 0.15);
+            color: white;
+            padding: 0.2rem 0.75rem;
             border-radius: 4px;
             margin-left: 1rem;
             white-space: nowrap;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .ticker-content {
             white-space: nowrap;
-            animation: ticker 25s linear infinite;
+            animation: ticker 30s linear infinite;
+            font-size: 0.95rem;
         }
 
         @keyframes ticker {
@@ -110,33 +142,45 @@
             100% { transform: translateX(-100%); }
         }
 
+        /* الحاوية الرئيسية */
         .container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            max-width: 1250px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
         }
 
-        .search-filter {
-            display: flex;
-            gap: 1rem;
+        /* شريط البحث والتصنيفات */
+        .search-filter-section {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
             margin-bottom: 2rem;
-            flex-wrap: wrap;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
         }
 
         .search-box {
-            flex: 1;
-            min-width: 250px;
             position: relative;
+            width: 100%;
         }
 
         .search-box input {
             width: 100%;
-            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            padding: 0.9rem 1rem 0.9rem 3rem;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1rem;
             outline: none;
-            background: white;
+            background: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
         }
 
         .search-box i {
@@ -145,57 +189,76 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-light);
+            font-size: 1.1rem;
         }
 
         .categories {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.6rem;
             flex-wrap: wrap;
         }
 
         .cat-btn {
-            background: white;
+            background: var(--bg-color);
             border: 1px solid var(--border);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+            color: var(--text-main);
+            padding: 0.5rem 1.2rem;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
-            transition: 0.3s;
+            font-size: 0.95rem;
+            transition: var(--transition);
         }
 
         .cat-btn.active, .cat-btn:hover {
             background: var(--primary);
             color: white;
             border-color: var(--primary);
+            transform: translateY(-2px);
         }
 
+        /* شبكة الأخبار */
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 2rem;
         }
 
         .news-card {
             background: var(--card-bg);
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow);
             border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s;
+            transition: var(--transition);
+            cursor: pointer;
         }
 
         .news-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .news-img-wrapper {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+            background: var(--border);
         }
 
         .news-img {
             width: 100%;
-            height: 200px;
+            height: 100%;
             object-fit: cover;
-            background: #e2e8f0;
+            transition: transform 0.5s ease;
+        }
+
+        .news-card:hover .news-img {
+            transform: scale(1.05);
         }
 
         .news-body {
@@ -215,10 +278,10 @@
         }
 
         .news-tag {
-            background: #eff6ff;
+            background: rgba(29, 78, 216, 0.1);
             color: var(--primary);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
             font-weight: 700;
         }
 
@@ -226,44 +289,65 @@
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 0.75rem;
-            color: var(--primary-dark);
+            color: var(--text-main);
+            line-height: 1.4;
         }
 
         .news-desc {
             font-size: 0.95rem;
-            color: var(--text-main);
+            color: var(--text-light);
             margin-bottom: 1.5rem;
             flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .news-footer-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+
+        .read-more-btn {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
         }
 
         .news-links {
             display: flex;
-            gap: 0.75rem;
-            margin-top: auto;
-            border-top: 1px solid var(--border);
-            padding-top: 1rem;
-            flex-wrap: wrap;
+            gap: 0.5rem;
         }
 
         .custom-link {
-            display: inline-flex;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
             align-items: center;
-            gap: 5px;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            justify-content: center;
+            font-size: 0.9rem;
             text-decoration: none;
-            transition: 0.2s;
+            transition: var(--transition);
         }
 
         .link-fb { background: #1877f2; color: white; }
-        .link-ext { background: #0f172a; color: white; }
+        .link-ext { background: #334155; color: white; }
         .link-mail { background: #059669; color: white; }
+        .custom-link:hover { opacity: 0.85; transform: scale(1.1); }
 
-        .custom-link:hover { opacity: 0.9; }
-
-        /* Modal / لوحة التحكم */
+        /* نوافذ العرض (Modals) */
         .modal {
             display: none;
             position: fixed;
@@ -271,22 +355,31 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
             justify-content: center;
             align-items: center;
             padding: 1rem;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
-            background: white;
+            background: var(--card-bg);
+            color: var(--text-main);
             width: 100%;
-            max-width: 900px;
+            max-width: 850px;
             max-height: 90vh;
-            border-radius: 12px;
+            border-radius: 20px;
             overflow-y: auto;
-            padding: 2rem;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            padding: 2.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalFade 0.3s ease;
+        }
+
+        @keyframes modalFade {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .modal-header {
@@ -299,51 +392,77 @@
         }
 
         .close-modal {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
             cursor: pointer;
-            color: var(--text-light);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
         }
 
+        .close-modal:hover {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+
+        /* النماذج ولوحة التحكم */
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
 
         .form-group label {
             display: block;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            color: var(--text-main);
         }
 
         .form-control {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.8rem 1rem;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 1rem;
             outline: none;
+            background: var(--bg-color);
+            color: var(--text-main);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
         }
 
         textarea.form-control {
             resize: vertical;
-            height: 120px;
+            height: 140px;
         }
 
         .btn-primary {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.85rem 1.75rem;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 700;
             font-size: 1rem;
-            transition: 0.3s;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-primary:hover {
-            background: #1d4ed8;
+            background: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
         .admin-tabs {
@@ -351,22 +470,25 @@
             gap: 0.5rem;
             margin-bottom: 1.5rem;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.75rem;
+            flex-wrap: wrap;
         }
 
         .tab-btn {
-            background: none;
-            border: none;
-            padding: 0.5rem 1rem;
+            background: var(--bg-color);
+            border: 1px solid var(--border);
+            color: var(--text-light);
+            padding: 0.6rem 1.2rem;
             font-weight: 700;
             cursor: pointer;
-            color: var(--text-light);
-            border-radius: 6px;
+            border-radius: 8px;
+            transition: var(--transition);
         }
 
         .tab-btn.active {
             background: var(--primary);
             color: white;
+            border-color: var(--primary);
         }
 
         .tab-content {
@@ -375,17 +497,23 @@
 
         .tab-content.active {
             display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .admin-news-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.75rem;
+            padding: 1rem;
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: 10px;
             margin-bottom: 0.75rem;
-            background: #f8fafc;
+            background: var(--bg-color);
         }
 
         .admin-news-actions {
@@ -405,87 +533,123 @@
         .btn-danger { background: var(--danger); color: white; }
         .btn-success { background: var(--success); color: white; }
 
+        /* التذييل */
         footer {
             background: var(--primary-dark);
             color: white;
             text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
+            padding: 3rem 1.5rem;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        footer p {
+            opacity: 0.9;
         }
 
         @media(max-width: 768px) {
-            header h1 { font-size: 1.7rem; }
+            header h1 { font-size: 1.8rem; }
             .news-grid { grid-template-columns: 1fr; }
+            .top-bar { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="admin-btn-container">
-            <button class="btn-admin" onclick="openAdminModal()"><i class="fa-solid fa-lock"></i> دخول المشرف</button>
+    <!-- الشريط العلوي الاحترافي -->
+    <div class="top-bar">
+        <div class="top-bar-left">
+            <span><i class="fa-regular fa-calendar-days"></i> <span id="currentDate"></span></span>
+            <span><i class="fa-solid fa-globe"></i> تغطية عالمية ودولية</span>
         </div>
-        <h1>اللاجئين السوريين حول العالم</h1>
-        <p>المنصة الرسمية الموثوقة لمتابعة أخبار وشؤون وقضايا اللاجئين السوريين دولياً وعالمياً</p>
-    </header>
-
-    <div class="ticker-container">
-        <span class="ticker-title">عاجل:</span>
-        <div class="ticker-content" id="tickerText">
-            جاري تحديث الأخبار العالمية والتقارير الدولية الخاصة باللاجئين السوريين بشكل تلقائي...
+        <div class="top-bar-right">
+            <button class="theme-toggle" onclick="toggleTheme()"><i class="fa-solid fa-moon" id="themeIcon"></i> <span id="themeText">الوضع الليلي</span></button>
+            <button class="btn-admin-top" onclick="openAdminModal()"><i class="fa-solid fa-lock"></i> لوحة التحكم</button>
         </div>
     </div>
 
+    <!-- ترويسة الموقع -->
+    <header>
+        <h1>اللاجئين السوريين حول العالم</h1>
+        <p>المنصة الإخبارية والمجتمعية الأولى لمتابعة شؤون، حقوق، وقضايا اللاجئين السوريين في مختلف دول العالم والأمم المتحدة</p>
+    </header>
+
+    <!-- شريط العاجل -->
+    <div class="ticker-container">
+        <span class="ticker-title"><i class="fa-solid fa-bolt"></i> عاجل:</span>
+        <div class="ticker-content" id="tickerText">
+            جاري تحميل أحدث التقارير والبيانات الرسمية الخاصة باللاجئين السوريين حول العالم...
+        </div>
+    </div>
+
+    <!-- الحاوية الرئيسية -->
     <div class="container">
-        <div class="search-filter">
+        <!-- شريط البحث والتصنيفات -->
+        <div class="search-filter-section">
             <div class="search-box">
-                <i class="fa-solid fa-search"></i>
-                <input type="text" id="searchInput" placeholder="ابحث في الأخبار والتقارير..." oninput="filterNews()">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" placeholder="ابحث في الأخبار والتقارير والقرارات الدولية..." oninput="filterNews()">
             </div>
             <div class="categories" id="categoriesContainer">
                 <button class="cat-btn active" onclick="filterCategory('الكل', this)">الكل</button>
                 <button class="cat-btn" onclick="filterCategory('الأمم المتحدة', this)">الأمم المتحدة والمفوضية</button>
-                <button class="cat-btn" onclick="filterCategory('قرارات وقوانين', this)">قرارات وقوانين</button>
+                <button class="cat-btn" onclick="filterCategory('قرارات وقوانين', this)">قرارات وقوانين دولية</button>
                 <button class="cat-btn" onclick="filterCategory('خدمات ومساعدات', this)">خدمات ومساعدات</button>
-                <button class="cat-btn" onclick="filterCategory('قصص نجاح', this)">قصص نجاح</button>
+                <button class="cat-btn" onclick="filterCategory('قصص نجاح', this)">قصص نجاح واغتراب</button>
             </div>
         </div>
 
+        <!-- شبكة الأخبار -->
         <div class="news-grid" id="newsGrid">
-            <!-- سيتم تعبئة الأخبار هنا برمجياً -->
+            <!-- يتم تعبئة الأخبار ديناميكياً -->
         </div>
     </div>
 
-    <!-- نافذة تسجيل الدخول / لوحة التحكم للمشرف -->
+    <!-- نافذة قراءة الخبر الكامل (Modal) -->
+    <div class="modal" id="readModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span id="readModalTag" class="news-tag"></span>
+                <button class="close-modal" onclick="closeReadModal()">&times;</button>
+            </div>
+            <h2 id="readModalTitle" style="margin-bottom: 1rem; font-size: 1.6rem; color: var(--text-main);"></h2>
+            <p id="readModalDate" style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 1.5rem;"></p>
+            <img id="readModalImg" src="" style="width:100%; max-height:350px; object-fit:cover; border-radius:12px; margin-bottom:1.5rem;" alt="صورة الخبر">
+            <div id="readModalDesc" style="font-size: 1.05rem; line-height: 1.9; margin-bottom: 2rem; white-space: pre-line;"></div>
+            <div id="readModalLinks" style="display: flex; gap: 1rem; border-top: 1px solid var(--border); padding-top: 1.5rem; flex-wrap: wrap;"></div>
+        </div>
+    </div>
+
+    <!-- نافذة لوحة تحكم المشرف (Admin Modal) -->
     <div class="modal" id="adminModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>لوحة تحكم المشرف الحصري</h2>
+                <h2><i class="fa-solid fa-shield-halved"></i> لوحة تحكم المشرف الحصري</h2>
                 <button class="close-modal" onclick="closeAdminModal()">&times;</button>
             </div>
 
-            <!-- نموذج الدخول إذا لم يتم التحقق -->
+            <!-- تسجيل الدخول -->
             <div id="loginSection">
                 <div class="form-group">
                     <label>الرمز السري للدخول:</label>
-                    <input type="password" id="adminPasswordInput" class="form-control" placeholder="أدخل الرمز السري...">
+                    <input type="password" id="adminPasswordInput" class="form-control" placeholder="أدخل الرمز السري للمشرف...">
                 </div>
-                <button class="btn-primary" onclick="verifyAdmin()">تسجيل الدخول</button>
+                <button class="btn-primary" onclick="verifyAdmin()"><i class="fa-solid fa-key"></i> دخول اللوحة</button>
             </div>
 
-            <!-- لوحة التحكم الكاملة بعد الدخول -->
+            <!-- محتوى لوحة التحكم -->
             <div id="dashboardSection" style="display: none;">
                 <div class="admin-tabs">
-                    <button class="tab-btn active" onclick="switchTab(event, 'syncTab')">المصادر وجلب الأخبار التلقائي</button>
+                    <button class="tab-btn active" onclick="switchTab(event, 'syncTab')">جلب الأخبار التلقائي</button>
                     <button class="tab-btn" onclick="switchTab(event, 'addTab')">نشر خبر / بيان جديد</button>
                     <button class="tab-btn" onclick="switchTab(event, 'manageTab')">إدارة المنشورات</button>
-                    <button class="tab-btn" onclick="switchTab(event, 'settingsTab')">إعدادات المنصة</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'settingsTab')">إعدادات الحماية</button>
                 </div>
 
                 <!-- تبويب الجلب التلقائي -->
                 <div id="syncTab" class="tab-content active">
-                    <h3>جلب الأخبار تلقائياً من المنظمات الدولية (UNHCR, UN, DW, الجزيرة)</h3>
-                    <p style="margin: 1rem 0; color: var(--text-light);">يقوم النظام بالاتصال بالمصادر العالمية المعتمدة وسحب أحدث التقارير والبيانات الخاصة باللاجئين السوريين بضغطة زر.</p>
+                    <h3>المزامنة التلقائية مع المنظمات الدولية (UNHCR & UN)</h3>
+                    <p style="margin: 1rem 0; color: var(--text-light);">سحب أحدث التقارير والقرارات العالمية الخاصة باللاجئين السوريين بضغطة زر واحدة.</p>
                     <button class="btn-primary" onclick="runAutoSync()"><i class="fa-solid fa-sync"></i> بدء المزامنة الفورية الآن</button>
                     <div id="syncStatus" style="margin-top: 1rem; font-weight: bold; color: var(--success);"></div>
                 </div>
@@ -494,72 +658,95 @@
                 <div id="addTab" class="tab-content">
                     <form id="newsForm" onsubmit="saveNews(event)">
                         <input type="hidden" id="editIndex" value="-1">
+                        <input type="hidden" id="newsImg" value="">
+                        
                         <div class="form-group">
-                            <label>عنوان الخبر / المقال:</label>
-                            <input type="text" id="newsTitle" class="form-control" required>
+                            <label>عنوان الخبر / التقرير:</label>
+                            <input type="text" id="newsTitle" class="form-control" required placeholder="أدخل العنوان الرئيسي...">
                         </div>
                         <div class="form-group">
                             <label>التصنيف:</label>
                             <select id="newsCategory" class="form-control">
                                 <option value="الأمم المتحدة">الأمم المتحدة والمفوضية</option>
-                                <option value="قرارات وقوانين">قرارات وقوانين</option>
+                                <option value="قرارات وقوانين">قرارات وقوانين دولية</option>
                                 <option value="خدمات ومساعدات">خدمات ومساعدات</option>
-                                <option value="قصص نجاح">قصص نجاح</option>
+                                <option value="قصص نجاح">قصص نجاح واغتراب</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>رابط الصورة (URL):</label>
-                            <input type="url" id="newsImg" class="form-control" placeholder="https://example.com/image.jpg">
+                            <label>اختر صورة من الاستوديو / الملفات:</label>
+                            <input type="file" id="imageInput" class="form-control" accept="image/*" onchange="handleImageUpload(event)">
+                            <div id="imagePreviewContainer" style="margin-top: 10px;"></div>
                         </div>
                         <div class="form-group">
-                            <label>نص الخبر أو التفاصيل:</label>
-                            <textarea id="newsDesc" class="form-control" required></textarea>
+                            <label>تفاصيل الخبر أو المقال:</label>
+                            <textarea id="newsDesc" class="form-control" required placeholder="اكتب التفاصيل الكاملة هنا..."></textarea>
                         </div>
                         <div class="form-group">
-                            <label>رابط فيسبوك أو رابط خارجي إضافي:</label>
+                            <label>رابط فيسبوك أو رابط خارجي للمصدر:</label>
                             <input type="url" id="newsLink" class="form-control" placeholder="https://facebook.com/...">
                         </div>
                         <div class="form-group">
                             <label>البريد الإلكتروني للتواصل (اختياري):</label>
                             <input type="email" id="newsEmail" class="form-control" placeholder="contact@example.com">
                         </div>
-                        <button type="submit" class="btn-primary">نشر على الموقع رسمياً</button>
+                        <button type="submit" class="btn-primary"><i class="fa-solid fa-paper-plane"></i> نشر على الموقع رسمياً</button>
                     </form>
                 </div>
 
                 <!-- تبويب إدارة المنشورات -->
                 <div id="manageTab" class="tab-content">
-                    <h3>جميع المنشورات الحالية</h3>
-                    <div id="adminNewsList" style="margin-top: 1rem;">
-                        <!-- يتم تعبئتها ديناميكياً -->
-                    </div>
+                    <h3>جميع المنشورات والتقارير الحالية</h3>
+                    <div id="adminNewsList" style="margin-top: 1rem;"></div>
                 </div>
 
-                <!-- تبويب الإعدادات -->
+                <!-- تبويب إعدادات الحماية -->
                 <div id="settingsTab" class="tab-content">
                     <div class="form-group">
-                        <label>تغيير رمز دخول المشرف:</label>
-                        <input type="text" id="newAdminPass" class="form-control" placeholder="الرمز الجديد...">
+                        <label>تغيير رمز دخول المشرف السري:</label>
+                        <input type="text" id="newAdminPass" class="form-control" placeholder="أدخل الرمز السري الجديد...">
                     </div>
-                    <button class="btn-primary" onclick="updatePassword()">حفظ الرمز الجديد</button>
+                    <button class="btn-primary" onclick="updatePassword()"><i class="fa-solid fa-floppy-disk"></i> حفظ الرمز الجديد</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- التذييل -->
     <footer>
         <p>جميع الحقوق محفوظة © 2026 - منصة اللاجئين السوريين حول العالم</p>
         <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8;">بإشراف وإدارة: وليد السلامات</p>
     </footer>
 
     <script>
-        // البيانات الافتراضية والأساسية للمنصة (تضم أخبار المفوضية والأمم المتحدة)
+        // التاريخ الحالي بالهجري والميلادي
+        document.getElementById('currentDate').innerText = new Date().toLocaleDateString('ar-SY', { year: 'numeric', month: 'long', day: 'numeric' });
+
+        // تبديل الوضع الليلي والنهاري
+        function toggleTheme() {
+            let currentTheme = document.documentElement.getAttribute('data-theme');
+            let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('site_theme', newTheme);
+            document.getElementById('themeIcon').className = newTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            document.getElementById('themeText').innerText = newTheme === 'dark' ? 'الوضع النهاري' : 'الوضع الليلي';
+        }
+
+        // استرجاع الثيم المحفوظ
+        let savedTheme = localStorage.getItem('site_theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        if(savedTheme === 'dark') {
+            document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+            document.getElementById('themeText').innerText = 'الوضع النهاري';
+        }
+
+        // البيانات الأساسية
         let defaultNews = [
             {
-                title: "المفوضية السامية لشؤون اللاجئين تصدر تقريراً جديداً حول أوضاع اللاجئين السوريين في دول الإقليم",
+                title: "المفوضية السامية لشؤون اللاجئين تصدر تقريراً شاملاً حول أوضاع اللاجئين السوريين في دول الإقليم",
                 category: "الأمم المتحدة",
                 img: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb9?auto=format&fit=crop&w=800&q=80",
-                desc: "أصدرت المفوضية السامية للأمم المتحدة لشؤون اللاجئين (UNHCR) تحديثاً شاملاً يستعرض التحديات الإنسانية وجهود الاستجابة الدولية لتوفير الحماية والمساعدات الأساسية للاجئين السوريين في الدول المستضيفة.",
+                desc: "أصدرت المفوضية السامية للأمم المتحدة لشؤون اللاجئين (UNHCR) تحديثاً موسعاً يستعرض التحديات الإنسانية وجهود الاستجابة الدولية لتوفير الحماية والمساعدات الأساسية للاجئين السوريين في الدول المستضيفة، مع التركيز على سبل تحسين ظروف المعيشة والتعليم.",
                 link: "https://www.unhcr.org",
                 email: "support@unhcr.org",
                 date: "2026-03-30"
@@ -568,28 +755,17 @@
                 title: "برنامج الأمم المتحدة الإنمائي يطلق حزمة مشاريع دعم سبل العيش للاجئين والعائدين",
                 category: "خدمات ومساعدات",
                 img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
-                desc: "أعلن برنامج الأمم المتحدة الإنمائي عن مبادرة جديدة تهدف إلى دعم مشاريع ريادة الأعمال والتمكين الاقتصادي والمهني للمساهمة في تحسين الظروف المعيشية المستدامة.",
+                desc: "أعلن برنامج الأمم المتحدة الإنمائي عن مبادرة دولية جديدة تهدف إلى دعم مشاريع ريادة الأعمال والتمكين الاقتصادي والمهني للمساهمة في تحسين الظروف المعيشية المستدامة وتوفير فرص عمل.",
                 link: "https://www.undp.org",
                 email: "info@undp.org",
                 date: "2026-03-29"
-            },
-            {
-                title: "تحديثات هامة حول إجراءات الإقامة ولم الشمل العائلي في الدول الأوروبية",
-                category: "قرارات وقوانين",
-                img: "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
-                desc: "رصد تقرير حقوقي دولي أحدث التعديلات والقرارات القانونية المتعلقة بطلبات اللجوء، الإقامات الإنسانية، وتسهيلات لم الشمل العائلي للسوريين في أوروبا.",
-                link: "https://facebook.com",
-                email: "legal@refugeesworld.org",
-                date: "2026-03-28"
             }
         ];
 
-        // تحميل الأخبار من التخزين المحلي أو الاعتماد على الافتراضية
         let newsList = JSON.parse(localStorage.getItem('syrian_refugees_news')) || defaultNews;
         let adminPassword = localStorage.getItem('syrian_admin_pass') || 'Waleed2026';
         let currentCategory = 'الكل';
 
-        // عرض الأخبار عند تحميل الصفحة
         window.onload = function() {
             renderNews();
             updateTicker();
@@ -600,30 +776,61 @@
             grid.innerHTML = '';
 
             if(listToRender.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; padding: 2rem; color: var(--text-light);">لا توجد منشورات حالياً.</p>';
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; padding: 3rem; color: var(--text-light);">لا توجد منشورات حالياً.</p>';
                 return;
             }
 
             listToRender.forEach((news, index) => {
+                let actualIndex = newsList.indexOf(news);
                 let card = document.createElement('div');
                 card.className = 'news-card';
                 card.innerHTML = `
-                    <img src="${news.img || 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80'}" class="news-img" alt="صورة الخبر">
+                    <div class="news-img-wrapper" onclick="openReadModal(${actualIndex})">
+                        <img src="${news.img || 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80'}" class="news-img" alt="صورة الخبر">
+                    </div>
                     <div class="news-body">
                         <div class="news-meta">
                             <span class="news-tag">${news.category}</span>
                             <span><i class="fa-regular fa-calendar"></i> ${news.date || '2026'}</span>
                         </div>
-                        <h3 class="news-title">${news.title}</h3>
+                        <h3 class="news-title" onclick="openReadModal(${actualIndex})">${news.title}</h3>
                         <p class="news-desc">${news.desc}</p>
-                        <div class="news-links">
-                            ${news.link ? `<a href="${news.link}" target="_blank" class="custom-link ${news.link.includes('facebook') ? 'link-fb' : 'link-ext'}"><i class="${news.link.includes('facebook') ? 'fa-brands fa-facebook' : 'fa-solid fa-link'}"></i> ${news.link.includes('facebook') ? 'فيسبوك' : 'رابط المصدر'}</a>` : ''}
-                            ${news.email ? `<a href="mailto:${news.email}" class="custom-link link-mail"><i class="fa-solid fa-envelope"></i> تواصل</a>` : ''}
+                        <div class="news-footer-card">
+                            <button class="read-more-btn" onclick="openReadModal(${actualIndex})">قراءة التفاصيل <i class="fa-solid fa-arrow-left"></i></button>
+                            <div class="news-links">
+                                ${news.link ? `<a href="${news.link}" target="_blank" class="custom-link ${news.link.includes('facebook') ? 'link-fb' : 'link-ext'}" title="رابط المصدر"><i class="${news.link.includes('facebook') ? 'fa-brands fa-facebook-f' : 'fa-solid fa-link'}"></i></a>` : ''}
+                                ${news.email ? `<a href="mailto:${news.email}" class="custom-link link-mail" title="مراسلة"><i class="fa-solid fa-envelope"></i></a>` : ''}
+                            </div>
                         </div>
                     </div>
                 `;
                 grid.appendChild(card);
             });
+        }
+
+        // نافذة قراءة المقال الكامل
+        function openReadModal(index) {
+            let news = newsList[index];
+            document.getElementById('readModalTag').innerText = news.category;
+            document.getElementById('readModalTitle').innerText = news.title;
+            document.getElementById('readModalDate').innerText = `تاريخ النشر: ${news.date || '2026'}`;
+            document.getElementById('readModalImg').src = news.img || 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80';
+            document.getElementById('readModalDesc').innerText = news.desc;
+
+            let linksContainer = document.getElementById('readModalLinks');
+            linksContainer.innerHTML = '';
+            if(news.link) {
+                linksContainer.innerHTML += `<a href="${news.link}" target="_blank" class="btn-primary" style="text-decoration:none;"><i class="fa-solid fa-external-link-alt"></i> زيارة رابط المصدر / فيسبوك</a>`;
+            }
+            if(news.email) {
+                linksContainer.innerHTML += `<a href="mailto:${news.email}" class="btn-primary" style="background:#059669; text-decoration:none;"><i class="fa-solid fa-envelope"></i> التواصل عبر البريد</a>`;
+            }
+
+            document.getElementById('readModal').style.display = 'flex';
+        }
+
+        function closeReadModal() {
+            document.getElementById('readModal').style.display = 'none';
         }
 
         function updateTicker() {
@@ -651,7 +858,7 @@
             renderNews(filtered);
         }
 
-        // إداراة لوحة التحكم
+        // التحكم الإداري
         function openAdminModal() {
             document.getElementById('adminModal').style.display = 'flex';
         }
@@ -678,15 +885,28 @@
             evt.currentTarget.classList.add('active');
         }
 
+        // رفع الصور من الاستوديو محلياً
+        function handleImageUpload(event) {
+            let file = event.target.files[0];
+            if(file) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('newsImg').value = e.target.result;
+                    document.getElementById('imagePreviewContainer').innerHTML = `<img src="${e.target.result}" style="max-width: 120px; max-height: 120px; border-radius: 8px; border: 1px solid var(--border);"> <span style="color:var(--success); font-weight:bold; display:block; font-size:0.9rem; margin-top:5px;">تم اختيار الصورة بنجاح</span>`;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
         function runAutoSync() {
             let status = document.getElementById('syncStatus');
-            status.innerHTML = 'جاري الاتصال بمصادر الأمم المتحدة والمفوضية السامية وجلب أحدث التقارير...';
+            status.innerHTML = 'جاري الاتصال بمصادر الأمم المتحدة والمفوضية السامية وجلب أحدث التقارير والدراسات...';
             setTimeout(() => {
                 let fetchedNews = {
-                    title: "المفوضية السامية للأمم المتحدة تؤكد التزامها بدعم وتأمين الحماية للاجئين السوريين",
+                    title: "المفوضية السامية للأمم المتحدة تؤكد التزامها بتوفير الحماية والدعم المستدام للاجئين السوريين",
                     category: "الأمم المتحدة",
                     img: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=800&q=80",
-                    desc: "في أحدث بيان صادر عن مقر المفوضية الدولية، تم استعراض أبرز البرامج الإنسانية والاحتياجات الملحة لدعم اللاجئين السوريين في مختلف دول اللجوء والشتات.",
+                    desc: "في أحدث بيان رسمي صادر عن مقر المفوضية الدولية، تم استعراض أبرز البرامج الإنسانية والاحتياجات الملحة لدعم اللاجئين السوريين في مختلف دول اللجوء والشتات، وتوسيع نطاق الخدمات التعليمية والصحية.",
                     link: "https://www.unhcr.org",
                     email: "media@unhcr.org",
                     date: "2026-03-30"
@@ -703,10 +923,16 @@
         function saveNews(e) {
             e.preventDefault();
             let editIndex = document.getElementById('editIndex').value;
+            let currentImg = document.getElementById('newsImg').value;
+            
+            if(!currentImg && editIndex != -1) {
+                currentImg = newsList[editIndex].img;
+            }
+
             let newItem = {
                 title: document.getElementById('newsTitle').value,
                 category: document.getElementById('newsCategory').value,
-                img: document.getElementById('newsImg').value,
+                img: currentImg || 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80',
                 desc: document.getElementById('newsDesc').value,
                 link: document.getElementById('newsLink').value,
                 email: document.getElementById('newsEmail').value,
@@ -725,6 +951,8 @@
             renderAdminList();
             updateTicker();
             document.getElementById('newsForm').reset();
+            document.getElementById('imagePreviewContainer').innerHTML = '';
+            document.getElementById('newsImg').value = '';
             alert('تم الحفظ والنشر بنجاح على الموقع!');
         }
 
@@ -735,7 +963,7 @@
                 let div = document.createElement('div');
                 div.className = 'admin-news-item';
                 div.innerHTML = `
-                    <span><strong>${news.category}:</strong> ${news.title.substring(0, 50)}...</span>
+                    <span><strong>${news.category}:</strong> ${news.title.substring(0, 45)}...</span>
                     <div class="admin-news-actions">
                         <button class="btn-sm btn-success" onclick="editNews(${idx})">تعديل</button>
                         <button class="btn-sm btn-danger" onclick="deleteNews(${idx})">حذف</button>
@@ -764,8 +992,8 @@
             document.getElementById('newsLink').value = news.link || '';
             document.getElementById('newsEmail').value = news.email || '';
             document.getElementById('editIndex').value = idx;
+            document.getElementById('imagePreviewContainer').innerHTML = `<span style="color:var(--text-light); font-size:0.9rem;">الصورة الحالية محفوظة (اختر صورة جديدة إن أردت استبدالها)</span>`;
             
-            // الانتقال لتبويب النشر
             document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
             document.getElementById('addTab').classList.add('active');
