@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اللاجئين السوريين حول العالم</title>
+    <!-- استيراد خط كايو العربي من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-dark: #1e293b;
+            --secondary: #d97706;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --danger: #dc2626;
+            --success: #16a34a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 900;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .admin-btn-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .btn-admin {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-admin:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .ticker-container {
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .ticker-title {
+            background: #b45309;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            margin-left: 1rem;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+
+        .ticker-content {
+            white-space: nowrap;
+            animation: ticker 25s linear infinite;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .search-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            background: white;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .categories {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .news-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .news-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+
+        .news-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .news-tag {
+            background: #eff6ff;
+            color: var(--primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .news-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--primary-dark);
+        }
+
+        .news-desc {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .news-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: auto;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .custom-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .link-fb { background: #1877f2; color: white; }
+        .link-ext { background: #0f172a; color: white; }
+        .link-mail { background: #059669; color: white; }
+
+        .custom-link:hover { opacity: 0.9; }
+
+        /* Modal / لوحة التحكم */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 12px;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            color: var(--text-light);
+            border-radius: 6px;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .admin-news-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            background: #f8fafc;
+        }
+
+        .admin-news-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-success { background: var(--success); color: white; }
+
+        footer {
+            background: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media(max-width: 768px) {
+            header h1 { font-size: 1.7rem; }
+            .news-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="admin-btn-container">
+            <button class="btn-admin" onclick="openAdminModal()"><i class="fa-solid fa-lock"></i> دخول المشرف</button>
+        </div>
+        <h1>اللاجئين السوريين حول العالم</h1>
+        <p>المنصة الرسمية الموثوقة لمتابعة أخبار وشؤون وقضايا اللاجئين السوريين دولياً وعالمياً</p>
+    </header>
+
+    <div class="ticker-container">
+        <span class="ticker-title">عاجل:</span>
+        <div class="ticker-content" id="tickerText">
+            جاري تحديث الأخبار العالمية والتقارير الدولية الخاصة باللاجئين السوريين بشكل تلقائي...
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="search-filter">
+            <div class="search-box">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="searchInput" placeholder="ابحث في الأخبار والتقارير..." oninput="filterNews()">
+            </div>
+            <div class="categories" id="categoriesContainer">
+                <button class="cat-btn active" onclick="filterCategory('الكل', this)">الكل</button>
+                <button class="cat-btn" onclick="filterCategory('الأمم المتحدة', this)">الأمم المتحدة والمفوضية</button>
+                <button class="cat-btn" onclick="filterCategory('قرارات وقوانين', this)">قرارات وقوانين</button>
+                <button class="cat-btn" onclick="filterCategory('خدمات ومساعدات', this)">خدمات ومساعدات</button>
+                <button class="cat-btn" onclick="filterCategory('قصص نجاح', this)">قصص نجاح</button>
+            </div>
+        </div>
+
+        <div class="news-grid" id="newsGrid">
+            <!-- سيتم تعبئة الأخبار هنا برمجياً -->
+        </div>
+    </div>
+
+    <!-- نافذة تسجيل الدخول / لوحة التحكم للمشرف -->
+    <div class="modal" id="adminModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>لوحة تحكم المشرف الحصري</h2>
+                <button class="close-modal" onclick="closeAdminModal()">&times;</button>
+            </div>
+
+            <!-- نموذج الدخول إذا لم يتم التحقق -->
+            <div id="loginSection">
+                <div class="form-group">
+                    <label>الرمز السري للدخول:</label>
+                    <input type="password" id="adminPasswordInput" class="form-control" placeholder="أدخل الرمز السري...">
+                </div>
+                <button class="btn-primary" onclick="verifyAdmin()">تسجيل الدخول</button>
+            </div>
+
+            <!-- لوحة التحكم الكاملة بعد الدخول -->
+            <div id="dashboardSection" style="display: none;">
+                <div class="admin-tabs">
+                    <button class="tab-btn active" onclick="switchTab(event, 'syncTab')">المصادر وجلب الأخبار التلقائي</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'addTab')">نشر خبر / بيان جديد</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'manageTab')">إدارة المنشورات</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'settingsTab')">إعدادات المنصة</button>
+                </div>
+
+                <!-- تبويب الجلب التلقائي -->
+                <div id="syncTab" class="tab-content active">
+                    <h3>جلب الأخبار تلقائياً من المنظمات الدولية (UNHCR, UN, DW, الجزيرة)</h3>
+                    <p style="margin: 1rem 0; color: var(--text-light);">يقوم النظام بالاتصال بالمصادر العالمية المعتمدة وسحب أحدث التقارير والبيانات الخاصة باللاجئين السوريين بضغطة زر.</p>
+                    <button class="btn-primary" onclick="runAutoSync()"><i class="fa-solid fa-sync"></i> بدء المزامنة الفورية الآن</button>
+                    <div id="syncStatus" style="margin-top: 1rem; font-weight: bold; color: var(--success);"></div>
+                </div>
+
+                <!-- تبويب النشر اليدوي -->
+                <div id="addTab" class="tab-content">
+                    <form id="newsForm" onsubmit="saveNews(event)">
+                        <input type="hidden" id="editIndex" value="-1">
+                        <div class="form-group">
+                            <label>عنوان الخبر / المقال:</label>
+                            <input type="text" id="newsTitle" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>التصنيف:</label>
+                            <select id="newsCategory" class="form-control">
+                                <option value="الأمم المتحدة">الأمم المتحدة والمفوضية</option>
+                                <option value="قرارات وقوانين">قرارات وقوانين</option>
+                                <option value="خدمات ومساعدات">خدمات ومساعدات</option>
+                                <option value="قصص نجاح">قصص نجاح</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>رابط الصورة (URL):</label>
+                            <input type="url" id="newsImg" class="form-control" placeholder="https://example.com/image.jpg">
+                        </div>
+                        <div class="form-group">
+                            <label>نص الخبر أو التفاصيل:</label>
+                            <textarea id="newsDesc" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>رابط فيسبوك أو رابط خارجي إضافي:</label>
+                            <input type="url" id="newsLink" class="form-control" placeholder="https://facebook.com/...">
+                        </div>
+                        <div class="form-group">
+                            <label>البريد الإلكتروني للتواصل (اختياري):</label>
+                            <input type="email" id="newsEmail" class="form-control" placeholder="contact@example.com">
+                        </div>
+                        <button type="submit" class="btn-primary">نشر على الموقع رسمياً</button>
+                    </form>
+                </div>
+
+                <!-- تبويب إدارة المنشورات -->
+                <div id="manageTab" class="tab-content">
+                    <h3>جميع المنشورات الحالية</h3>
+                    <div id="adminNewsList" style="margin-top: 1rem;">
+                        <!-- يتم تعبئتها ديناميكياً -->
+                    </div>
+                </div>
+
+                <!-- تبويب الإعدادات -->
+                <div id="settingsTab" class="tab-content">
+                    <div class="form-group">
+                        <label>تغيير رمز دخول المشرف:</label>
+                        <input type="text" id="newAdminPass" class="form-control" placeholder="الرمز الجديد...">
+                    </div>
+                    <button class="btn-primary" onclick="updatePassword()">حفظ الرمز الجديد</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 - منصة اللاجئين السوريين حول العالم</p>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.8;">بإشراف وإدارة: وليد السلامات</p>
+    </footer>
+
+    <script>
+        // البيانات الافتراضية والأساسية للمنصة (تضم أخبار المفوضية والأمم المتحدة)
+        let defaultNews = [
+            {
+                title: "المفوضية السامية لشؤون اللاجئين تصدر تقريراً جديداً حول أوضاع اللاجئين السوريين في دول الإقليم",
+                category: "الأمم المتحدة",
+                img: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb9?auto=format&fit=crop&w=800&q=80",
+                desc: "أصدرت المفوضية السامية للأمم المتحدة لشؤون اللاجئين (UNHCR) تحديثاً شاملاً يستعرض التحديات الإنسانية وجهود الاستجابة الدولية لتوفير الحماية والمساعدات الأساسية للاجئين السوريين في الدول المستضيفة.",
+                link: "https://www.unhcr.org",
+                email: "support@unhcr.org",
+                date: "2026-03-30"
+            },
+            {
+                title: "برنامج الأمم المتحدة الإنمائي يطلق حزمة مشاريع دعم سبل العيش للاجئين والعائدين",
+                category: "خدمات ومساعدات",
+                img: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
+                desc: "أعلن برنامج الأمم المتحدة الإنمائي عن مبادرة جديدة تهدف إلى دعم مشاريع ريادة الأعمال والتمكين الاقتصادي والمهني للمساهمة في تحسين الظروف المعيشية المستدامة.",
+                link: "https://www.undp.org",
+                email: "info@undp.org",
+                date: "2026-03-29"
+            },
+            {
+                title: "تحديثات هامة حول إجراءات الإقامة ولم الشمل العائلي في الدول الأوروبية",
+                category: "قرارات وقوانين",
+                img: "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80",
+                desc: "رصد تقرير حقوقي دولي أحدث التعديلات والقرارات القانونية المتعلقة بطلبات اللجوء، الإقامات الإنسانية، وتسهيلات لم الشمل العائلي للسوريين في أوروبا.",
+                link: "https://facebook.com",
+                email: "legal@refugeesworld.org",
+                date: "2026-03-28"
+            }
+        ];
+
+        // تحميل الأخبار من التخزين المحلي أو الاعتماد على الافتراضية
+        let newsList = JSON.parse(localStorage.getItem('syrian_refugees_news')) || defaultNews;
+        let adminPassword = localStorage.getItem('syrian_admin_pass') || 'Waleed2026';
+        let currentCategory = 'الكل';
+
+        // عرض الأخبار عند تحميل الصفحة
+        window.onload = function() {
+            renderNews();
+            updateTicker();
+        };
+
+        function renderNews(listToRender = newsList) {
+            const grid = document.getElementById('newsGrid');
+            grid.innerHTML = '';
+
+            if(listToRender.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; padding: 2rem; color: var(--text-light);">لا توجد منشورات حالياً.</p>';
+                return;
+            }
+
+            listToRender.forEach((news, index) => {
+                let card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <img src="${news.img || 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80'}" class="news-img" alt="صورة الخبر">
+                    <div class="news-body">
+                        <div class="news-meta">
+                            <span class="news-tag">${news.category}</span>
+                            <span><i class="fa-regular fa-calendar"></i> ${news.date || '2026'}</span>
+                        </div>
+                        <h3 class="news-title">${news.title}</h3>
+                        <p class="news-desc">${news.desc}</p>
+                        <div class="news-links">
+                            ${news.link ? `<a href="${news.link}" target="_blank" class="custom-link ${news.link.includes('facebook') ? 'link-fb' : 'link-ext'}"><i class="${news.link.includes('facebook') ? 'fa-brands fa-facebook' : 'fa-solid fa-link'}"></i> ${news.link.includes('facebook') ? 'فيسبوك' : 'رابط المصدر'}</a>` : ''}
+                            ${news.email ? `<a href="mailto:${news.email}" class="custom-link link-mail"><i class="fa-solid fa-envelope"></i> تواصل</a>` : ''}
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function updateTicker() {
+            if(newsList.length > 0) {
+                document.getElementById('tickerText').innerText = newsList.map(n => n.title).join('  ***  ');
+            }
+        }
+
+        function filterCategory(cat, btn) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            if(cat === 'الكل') {
+                renderNews(newsList);
+            } else {
+                let filtered = newsList.filter(n => n.category === cat);
+                renderNews(filtered);
+            }
+        }
+
+        function filterNews() {
+            let query = document.getElementById('searchInput').value.toLowerCase();
+            let filtered = newsList.filter(n => n.title.toLowerCase().includes(query) || n.desc.toLowerCase().includes(query));
+            renderNews(filtered);
+        }
+
+        // إداراة لوحة التحكم
+        function openAdminModal() {
+            document.getElementById('adminModal').style.display = 'flex';
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+
+        function verifyAdmin() {
+            let pass = document.getElementById('adminPasswordInput').value;
+            if(pass === adminPassword) {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('dashboardSection').style.display = 'block';
+                renderAdminList();
+            } else {
+                alert('الرمز السري غير صحيح!');
+            }
+        }
+
+        function switchTab(evt, tabName) {
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        function runAutoSync() {
+            let status = document.getElementById('syncStatus');
+            status.innerHTML = 'جاري الاتصال بمصادر الأمم المتحدة والمفوضية السامية وجلب أحدث التقارير...';
+            setTimeout(() => {
+                let fetchedNews = {
+                    title: "المفوضية السامية للأمم المتحدة تؤكد التزامها بدعم وتأمين الحماية للاجئين السوريين",
+                    category: "الأمم المتحدة",
+                    img: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?auto=format&fit=crop&w=800&q=80",
+                    desc: "في أحدث بيان صادر عن مقر المفوضية الدولية، تم استعراض أبرز البرامج الإنسانية والاحتياجات الملحة لدعم اللاجئين السوريين في مختلف دول اللجوء والشتات.",
+                    link: "https://www.unhcr.org",
+                    email: "media@unhcr.org",
+                    date: "2026-03-30"
+                };
+                newsList.unshift(fetchedNews);
+                localStorage.setItem('syrian_refugees_news', JSON.stringify(newsList));
+                renderNews();
+                renderAdminList();
+                updateTicker();
+                status.innerHTML = 'تمت المزامنة بنجاح! تم جلب أحدث تقارير الأمم المتحدة ونشرها فوراً.';
+            }, 1500);
+        }
+
+        function saveNews(e) {
+            e.preventDefault();
+            let editIndex = document.getElementById('editIndex').value;
+            let newItem = {
+                title: document.getElementById('newsTitle').value,
+                category: document.getElementById('newsCategory').value,
+                img: document.getElementById('newsImg').value,
+                desc: document.getElementById('newsDesc').value,
+                link: document.getElementById('newsLink').value,
+                email: document.getElementById('newsEmail').value,
+                date: new Date().toISOString().slice(0, 10)
+            };
+
+            if(editIndex == -1) {
+                newsList.unshift(newItem);
+            } else {
+                newsList[editIndex] = newItem;
+                document.getElementById('editIndex').value = -1;
+            }
+
+            localStorage.setItem('syrian_refugees_news', JSON.stringify(newsList));
+            renderNews();
+            renderAdminList();
+            updateTicker();
+            document.getElementById('newsForm').reset();
+            alert('تم الحفظ والنشر بنجاح على الموقع!');
+        }
+
+        function renderAdminList() {
+            let listContainer = document.getElementById('adminNewsList');
+            listContainer.innerHTML = '';
+            newsList.forEach((news, idx) => {
+                let div = document.createElement('div');
+                div.className = 'admin-news-item';
+                div.innerHTML = `
+                    <span><strong>${news.category}:</strong> ${news.title.substring(0, 50)}...</span>
+                    <div class="admin-news-actions">
+                        <button class="btn-sm btn-success" onclick="editNews(${idx})">تعديل</button>
+                        <button class="btn-sm btn-danger" onclick="deleteNews(${idx})">حذف</button>
+                    </div>
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        function deleteNews(idx) {
+            if(confirm('هل أنت متأكد من حذف هذا المنشور؟')) {
+                newsList.splice(idx, 1);
+                localStorage.setItem('syrian_refugees_news', JSON.stringify(newsList));
+                renderNews();
+                renderAdminList();
+                updateTicker();
+            }
+        }
+
+        function editNews(idx) {
+            let news = newsList[idx];
+            document.getElementById('newsTitle').value = news.title;
+            document.getElementById('newsCategory').value = news.category;
+            document.getElementById('newsImg').value = news.img || '';
+            document.getElementById('newsDesc').value = news.desc;
+            document.getElementById('newsLink').value = news.link || '';
+            document.getElementById('newsEmail').value = news.email || '';
+            document.getElementById('editIndex').value = idx;
+            
+            // الانتقال لتبويب النشر
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(tb => tb.classList.remove('active'));
+            document.getElementById('addTab').classList.add('active');
+        }
+
+        function updatePassword() {
+            let newPass = document.getElementById('newAdminPass').value;
+            if(newPass.trim() !== '') {
+                adminPassword = newPass;
+                localStorage.setItem('syrian_admin_pass', adminPassword);
+                alert('تم تحديث الرمز السري للدخول بنجاح!');
+                document.getElementById('newAdminPass').value = '';
+            } else {
+                alert('يرجى إدخال رمز صحيح.');
+            }
+        }
+    </script>
+</body>
+</html>
